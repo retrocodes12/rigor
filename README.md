@@ -49,11 +49,52 @@ Then in any session:
 /rigor export                # print the portable prompt for other chatbots
 ```
 
-## Install (everything else)
+## Install (Claude app — claude.ai)
 
-Copy the block below the divider in
-[`references/portable-prompt.md`](references/portable-prompt.md) into the bot's system prompt or
-custom-instructions field.
+Claude.ai accepts real skill uploads (same format as Claude Code), on every plan including Free:
+
+1. Grab **`rigor.zip`** from the [latest release](https://github.com/retrocodes12/rigor/releases/latest)
+   — don't use GitHub's *Download ZIP* button; it wraps the files in a `rigor-main/` folder,
+   which can fail skill validation.
+2. On **claude.ai in a browser**, open **Settings → Capabilities** and enable
+   *code execution and file creation* (skills require it).
+3. Go to **Customize → Skills → "+" → Create skill → Upload a skill** and upload the zip.
+4. Claude now invokes it automatically when a request looks like fact-checking — or say
+   *"use my rigor skill on this claim."*
+
+**Mobile caveat:** Anthropic's docs don't state whether uploaded skills fire in the mobile app,
+and reports conflict — test on your phone after uploading. Guaranteed mobile fallback: create a
+**Project** named "Rigor" on claude.ai, paste the portable prompt (everything below the `---`
+divider in [`references/portable-prompt.md`](references/portable-prompt.md)) into its project
+instructions, and chat inside that project — Projects sync to the mobile app. Pasting it into
+**Settings → Profile → personal preferences** applies it to every chat instead.
+
+## Install (ChatGPT)
+
+The paste block is ~3,300 characters, which overflows ChatGPT's 3,000-character
+custom-instructions field. Use either of these instead:
+
+- **Project (recommended, works on Free):** New project → name it "Rigor" → paste the portable
+  prompt into the project's **Instructions** → chat inside the project. Works in the mobile app.
+- **Custom GPT (needs Plus to create):** Explore GPTs → Create → paste the prompt into
+  **Instructions** (8,000-char limit) → save. Summon it in any chat with `@Rigor`.
+
+## Install (Gemini)
+
+Create a **Gem**: [gemini.google.com](https://gemini.google.com) → **Gems → New Gem** → paste the
+portable prompt as its instructions → save. Gems work in the Gemini mobile app too.
+
+## Install (any other chatbot)
+
+Open the
+[raw portable prompt](https://raw.githubusercontent.com/retrocodes12/rigor/main/references/portable-prompt.md),
+copy everything **below the `---` divider**, and paste it into the bot's system-prompt or
+custom-instructions box — Claude Projects, Copilot, Grok, Perplexity Spaces, LM Studio,
+Open WebUI, a Discord bot's persona field, anywhere.
+
+On surfaces where the bot can't browse the web, the prompt degrades honestly by design: claims
+get labeled `[trained]` / `[inference]` instead of being presented as verified. Same protocol,
+different ceiling.
 
 ## License
 
